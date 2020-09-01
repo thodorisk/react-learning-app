@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import UserInput from "./UserInput/UserInput";
+import UserOutput from "./UserOutput/UserOutput";
+import userInput from "./UserInput/UserInput";
+import userOutput from "./UserOutput/UserOutput";
 
 class App extends Component {
   state = {
@@ -39,7 +43,7 @@ class App extends Component {
       padding: '8px',
       border: '1px solid red'
     }
-    
+
     return (
       <div className="App">
         <h1>Welcome to React</h1>
@@ -60,6 +64,8 @@ class App extends Component {
         >
           My Hobbies: ...
         </Person>
+        <UserInput />
+        <UserOutput />
       </div>
     );
   }
