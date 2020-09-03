@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import UserInput from "./UserInput/UserInput";
-import UserOutput from "./UserOutput/UserOutput";
 
 class App extends Component {
   state = {
@@ -11,7 +9,7 @@ class App extends Component {
       { name: "theo1", age: 29 },
       { name: "theo2", age: 30 },
     ],
-    username: 'thodoris'
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
@@ -20,7 +18,7 @@ class App extends Component {
         { name: newName, age: 28 },
         { name: "theo1", age: 29 },
         { name: "theo2", age: 30 },
-      ]
+      ],
     });
   };
 
@@ -30,47 +28,51 @@ class App extends Component {
         { name: event.target.value, age: 28 },
         { name: "theo1", age: 29 },
         { name: "theo2", age: 30 },
-      ]
+      ],
     });
-  }
+  };
 
-  usernameChangedHandler = (event) => {
+  togglePersonsVisibilityHandler = () => {
+    const showPersons = this.state.showPersons;
     this.setState({
-      username: event.target.value
+      showPersons: !showPersons
     });
-  }
+  };
 
   render() {
-
     const style = {
-      backgroundColor: 'white',
-      cursor: 'pointer',
-      padding: '8px',
-      border: '1px solid red'
-    }
+      backgroundColor: "white",
+      cursor: "pointer",
+      padding: "8px",
+      border: "1px solid red",
+    };
 
     return (
       <div className="App">
         <h1>Welcome to React</h1>
-        <button style={style} onClick={this.switchNameHandler.bind(this, 'theodor')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          changed={this.nameChangedHandler}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-        />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          click={this.switchNameHandler.bind(this, 'theodorrr!!!')}
-        >
-          My Hobbies: ...
-        </Person>
-        <UserInput name={this.state.username} changed={this.usernameChangedHandler} />
-        <UserOutput username={this.state.username} />
+        <button style={style} onClick={this.togglePersonsVisibilityHandler}>
+          Switch Name
+        </button>
+        {this.state.showPersons ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              changed={this.nameChangedHandler}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+            />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+              click={this.switchNameHandler.bind(this, "theodorrr!!!")}
+            >
+              My Hobbies: ...
+            </Person>
+          </div>
+        ) : null}
       </div>
     );
   }
