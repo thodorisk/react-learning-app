@@ -13,6 +13,7 @@ class App extends Component {
       { name: "theo1", age: 29 },
       { name: "theo2", age: 30 },
     ],
+    username: 'thodoris'
   };
 
   switchNameHandler = (newName) => {
@@ -21,7 +22,7 @@ class App extends Component {
         { name: newName, age: 28 },
         { name: "theo1", age: 29 },
         { name: "theo2", age: 30 },
-      ],
+      ]
     });
   };
 
@@ -31,7 +32,15 @@ class App extends Component {
         { name: event.target.value, age: 28 },
         { name: "theo1", age: 29 },
         { name: "theo2", age: 30 },
-      ],
+      ]
+    });
+
+    console.log(this.state);
+  }
+
+  usernameChangedHandler = (event) => {
+    this.setState({
+      username: event.target.value
     });
   }
 
@@ -64,8 +73,8 @@ class App extends Component {
         >
           My Hobbies: ...
         </Person>
-        <UserInput />
-        <UserOutput />
+        <UserInput name={this.state.username} changed={this.usernameChangedHandler} />
+        <UserOutput username={this.state.username} />
       </div>
     );
   }
