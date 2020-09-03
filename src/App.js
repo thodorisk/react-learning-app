@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import person from "./Person/Person";
 
 class App extends Component {
   state = {
@@ -35,7 +36,7 @@ class App extends Component {
   togglePersonsVisibilityHandler = () => {
     const showPersons = this.state.showPersons;
     this.setState({
-      showPersons: !showPersons
+      showPersons: !showPersons,
     });
   };
 
@@ -47,32 +48,38 @@ class App extends Component {
       border: "1px solid red",
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+          changed={this.nameChangedHandler}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+        />
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+          click={this.switchNameHandler.bind(this, "theodorrr!!!")}
+        >
+          My Hobbies: ...
+        </Person>
+      </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Welcome to React</h1>
         <button style={style} onClick={this.togglePersonsVisibilityHandler}>
-          Switch Name
+          Toggle Persons
         </button>
-        {this.state.showPersons ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              changed={this.nameChangedHandler}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-            />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              click={this.switchNameHandler.bind(this, "theodorrr!!!")}
-            >
-              My Hobbies: ...
-            </Person>
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }
