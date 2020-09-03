@@ -3,8 +3,6 @@ import "./App.css";
 import Person from "./Person/Person";
 import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
-import userInput from "./UserInput/UserInput";
-import userOutput from "./UserOutput/UserOutput";
 
 class App extends Component {
   state = {
@@ -34,8 +32,6 @@ class App extends Component {
         { name: "theo2", age: 30 },
       ]
     });
-
-    console.log(this.state);
   }
 
   usernameChangedHandler = (event) => {
