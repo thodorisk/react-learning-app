@@ -68,9 +68,11 @@ class App extends Component {
       style.backgroundColor = 'cyan';
     }
 
+    let classes = ['red', 'bold'].join(' ');
+
     return (
       <div className="App">
-        <h1>Welcome to React</h1>
+        <h1 className={classes}>Welcome to React</h1>
         <button style={style} onClick={this.togglePersonsVisibilityHandler}>
           Toggle Persons
         </button>
