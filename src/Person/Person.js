@@ -1,5 +1,7 @@
 import React from 'react';
 import './Person.css';
+import Validation from "../Validation/Validation";
+
 
 const person = (props) => {
     return (
@@ -7,6 +9,7 @@ const person = (props) => {
             <p onClick={props.click}>i am {props.name} and i am {props.age} years old!</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.name}></input>
+            <Validation inputLength={props.name.length} />
         </div>
     )
 }
