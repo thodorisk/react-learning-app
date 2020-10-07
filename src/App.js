@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium from 'radium';
+import Radium, { StyleRoot } from "radium";
 
 class App extends Component {
   state = {
@@ -14,25 +14,27 @@ class App extends Component {
   };
 
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(person => person.id === id);
+    const personIndex = this.state.persons.findIndex(
+      (person) => person.id === id
+    );
     const person = {
-      ...this.state.persons[personIndex]
-    }
+      ...this.state.persons[personIndex],
+    };
 
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
     this.setState({
-      persons: persons
+      persons: persons,
     });
   };
 
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({persons: persons});
-  }
+    this.setState({ persons: persons });
+  };
 
   togglePersonsVisibilityHandler = () => {
     const showPersons = this.state.showPersons;
@@ -48,10 +50,10 @@ class App extends Component {
       cursor: "pointer",
       padding: "8px",
       border: "1px solid white",
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black",
+      },
     };
 
     let persons = null;
@@ -60,37 +62,40 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-            click={() => this.deletePersonHandler(index)}
-            name={person.name} 
-            age={person.age}
-            key={person.id}
-            changed={(event) => this.nameChangedHandler(event, person.id)} />
+            return (
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.nameChangedHandler(event, person.id)}
+              />
+            );
           })}
         </div>
       );
 
-      style.backgroundColor = 'cyan';
-      style[':hover'] = {
-        backgroundColor: 'lightred',
-        color: 'black'
-      }
+      style.backgroundColor = "cyan";
+      style[":hover"] = {
+        backgroundColor: "lightred",
+        color: "black",
+      };
     }
 
     let classes = [];
-    if (this.state.persons.length <= 2)
-      classes.push('purple');
-    if (this.state.persons.length <= 1)
-      classes.push('bold');
+    if (this.state.persons.length <= 2) classes.push("purple");
+    if (this.state.persons.length <= 1) classes.push("bold");
 
     return (
-      <div className="App">
-        <h1 className={classes.join(' ')}>Welcome to React</h1>
-        <button style={style} onClick={this.togglePersonsVisibilityHandler}>
-          Toggle Persons
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1 className={classes.join(" ")}>Welcome to React</h1>
+          <button style={style} onClick={this.togglePersonsVisibilityHandler}>
+            Toggle Persons
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
