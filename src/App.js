@@ -4,14 +4,14 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyledButton = styled.button`
-  background-color: blue;
+  background-color: ${props => props.alt ? 'blue' : 'purple'};
   color: white;
   cursor: pointer;
   padding: 8px;
   border: 1px solid white;
 
   &:hover {
-    background-color: lightgreen;
+    background-color: pink;
     color: black;
   }
 `;
@@ -57,18 +57,6 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "blue",
-      color: "white",
-      cursor: "pointer",
-      padding: "8px",
-      border: "1px solid white",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
-
     let persons = null;
 
     if (this.state.showPersons) {
@@ -87,12 +75,6 @@ class App extends Component {
           })}
         </div>
       );
-
-      style.backgroundColor = "cyan";
-      style[":hover"] = {
-        backgroundColor: "lightred",
-        color: "black",
-      };
     }
 
     let classes = [];
@@ -102,7 +84,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className={classes.join(" ")}>Welcome to React</h1>
-        <StyledButton onClick={this.togglePersonsVisibilityHandler}>
+        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsVisibilityHandler}>
           Toggle Persons
         </StyledButton>
         {persons}
